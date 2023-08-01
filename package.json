@@ -1,0 +1,44 @@
+{
+    "name": "inline-debugger",
+    "displayName": "Inline Debugger",
+    "description": "In-code debugger",
+    "publisher": "zardoy",
+    "version": "0.0.0-dev",
+    "preview": true,
+    "license": "MIT",
+    "extensionDependencies": [
+        "zardoy.ide-scripting"
+    ],
+    "categories": [
+        "Debuggers",
+        "Other"
+    ],
+    "contributes": {
+        "commands": [
+            {
+                "command": "evaluateTypescriptCodeInDebugConsole",
+                "title": "Evaluate Typescript Code in Debug Console"
+            }
+        ]
+    },
+    "scripts": {
+        "start": "vscode-framework start"
+    },
+    "devDependencies": {
+        "@types/vscode": "^1.76.0",
+        "@zardoy/tsconfig": "^1.5.0",
+        "@zardoy/vscode-utils": "^0.0.48",
+        "typescript": "^5.0.2",
+        "vscode-framework": "^0.0.18"
+    },
+    "prettier": {
+        "semi": false,
+        "singleQuote": true,
+        "proseWrap": "never",
+        "tabWidth": 4,
+        "trailingComma": "all",
+        "arrowParens": "avoid",
+        "printWidth": 160,
+        "endOfLine": "auto"
+    }
+}
