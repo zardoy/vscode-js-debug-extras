@@ -1,14 +1,16 @@
 import * as vscode from 'vscode'
 
 import { registerExtensionCommand } from 'vscode-framework'
+import extendJsDebug from './extendJsDebug'
 
 let scriptingApi
 
 export const activate = () => {
     const getScriptingApi = async () => {
+        if (!vscode.extensions.getExtension('zardoy.ide-scripting')) throw new Error('zardoy.ide-scripting extension is required to be installed & enabled')
         return (scriptingApi ??= await vscode.extensions
-            .getExtension('zardoy.ide-scripting')
-            ?.activate()
+            .getExtension('zardoy.ide-scripting')!
+            .activate()
             .then(api => {
                 return api.esbuild
             }))
@@ -30,4 +32,6 @@ export const activate = () => {
     //     if (!activeTextEditor) return
     //     activeTextEditor.selection
     // })
+
+    extendJsDebug()
 }

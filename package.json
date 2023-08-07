@@ -1,13 +1,16 @@
 {
-    "name": "inline-debugger",
-    "displayName": "Inline Debugger",
-    "description": "In-code debugger",
+    "name": "js-debug-extras",
+    "displayName": "JS Debugger Extras",
+    "description": "TS to debug console, hover additions and more!",
     "publisher": "zardoy",
     "version": "0.0.0-dev",
     "preview": true,
     "license": "MIT",
-    "extensionDependencies": [
-        "zardoy.ide-scripting"
+    "keywords": [
+        "typescript in debug console",
+        "javascript debug",
+        "better debugger",
+        "customPropertiesGenerator"
     ],
     "categories": [
         "Debuggers",
@@ -17,10 +20,83 @@
         "commands": [
             {
                 "command": "evaluateTypescriptCodeInDebugConsole",
-                "title": "Evaluate Typescript Code in Debug Console"
+                "title": "Evaluate TypeScript Code in Debug Console"
             }
-        ]
+        ],
+        "configuration": {
+            "properties": {
+                "hidePrototype": {
+                    "type": "boolean",
+                    "description": "Hides default [[prototype]] from objects, but not functions or classes",
+                    "default": false
+                },
+                "specialButtons": {
+                    "type": "object",
+                    "markdownDescription": "A list of special buttons to include as properties to objects like `__storeAsTemp`",
+                    "properties": {
+                        "__storeAsTemp": {
+                            "type": "boolean",
+                            "default": false
+                        },
+                        "__functionResult": {
+                            "type": "boolean",
+                            "default": false
+                        },
+                        "groupButtons": {
+                            "description": "all is shortcut for ",
+                            "oneOf": [
+                                {
+                                    "type": "boolean"
+                                },
+                                {
+                                    "type": "string",
+                                    "enum": [
+                                        "all"
+                                    ]
+                                }
+                            ],
+                            "default": false
+                        }
+                    }
+                },
+                "alwaysResolveGetters": {
+                    "type": "boolean",
+                    "markdownDescription": "Use this, instead of #debug.autoExpandLazyVariables#, to always resolve getters.",
+                    "default": false
+                },
+                "alwaysResolveGettersNames": {
+                    "type": "array",
+                    "description": "When alwaysResolveGetters is enabled and this array non empty we auto-resolve variables only you specify here ",
+                    "items": {
+                        "type": "string"
+                    },
+                    "default": []
+                },
+                "propertiesToHide": {
+                    "type": "array",
+                    "description": "Regular properties to hide in objects, (doesnt affect runtime, only preview)",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "extendCustomConfig": {
+                    "type": "object",
+                    "description": "(advanced usage only) extend any js config with custom debug launch/attach properties. properties launch and attach are reserved"
+                }
+            }
+        }
     },
+    "activationEvents": [
+        "onDebugResolve:pwa-node",
+        "onDebugResolve:node-terminal",
+        "onDebugResolve:pwa-extensionHost",
+        "onDebugResolve:pwa-chrome",
+        "onDebugResolve:pwa-msedge",
+        "onDebugResolve:node",
+        "onDebugResolve:chrome",
+        "onDebugResolve:extensionHost",
+        "onDebugResolve:msedge"
+    ],
     "scripts": {
         "start": "vscode-framework start"
     },
