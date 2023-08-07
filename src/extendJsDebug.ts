@@ -114,9 +114,6 @@ export default () => {
                 config.specialButtons = allCustomActionsButtons
             }
             if (config.hidePrototype || hasButtons || config.alwaysResolveGetters || config.propertiesToHide.length > 0) {
-                if (debugConfiguration.customPropertiesGenerator) {
-                    void vscode.window.showWarningMessage('`customPropertiesGenerator` from launch config will be ignored')
-                }
                 debugConfiguration.customPropertiesGenerator = injectScript
                     .toString()
                     .replace('injectScript', '')
