@@ -104,7 +104,9 @@ export default () => {
             }
             Object.assign(debugConfiguration, getExtensionSetting('extendCustomConfig'))
             const hasButtons = Object.values(config.specialButtons).some(x => x)
-            if (hasButtons && vscode.workspace.getConfiguration('').get('debug.autoExpandLazyVariables')) {
+            const autoExpandLazyVarsRaw = vscode.workspace.getConfiguration('').get('debug.autoExpandLazyVariables')
+            const autoExpandLazyVars = autoExpandLazyVarsRaw === true || autoExpandLazyVarsRaw !== 'off'
+            if (hasButtons && autoExpandLazyVars) {
                 config.specialButtons = {}
                 void vscode.window.showWarningMessage(
                     'We cant add special buttons as debug.autoExpandLazyVariables is enabled, please use alwaysResolveGetters instead',
